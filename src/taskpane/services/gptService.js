@@ -1,17 +1,21 @@
 /* eslint-disable no-undef */
 
+// Try to retreive the open AI key from RoamingSettings
+// If it doesn't exist, use the default key
+
 const gptService = {
-  getGPTResponse: async (prompt, messageBody) => {
+  // Function 1
+  getGPTResponse: async (messages, key) => {
     let gptReq = {
       model: "gpt-3.5-turbo",
-      messages: [{ role: "user", content: `${prompt}: ${messageBody}` }],
+      messages: messages,
     };
 
     const response = await fetch("https://api.openai.com/v1/chat/completions", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
-        Authorization: "Bearer ",
+        Authorization: `Bearer ${window.API_KEY}`,
       },
       body: JSON.stringify(gptReq),
     });

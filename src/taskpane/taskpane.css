@@ -3,34 +3,138 @@
  * See LICENSE in the project root for license information.
  */
 
- html,
- body {
-     width: 100%;
-     height: 100%;
-     margin: 0;
-     padding: 0;
- }
+html,
+body {
+  width: 100%;
+  height: 100%;
+  margin: 0;
+  padding: 0;
+}
 
- #root {
-    height: 100%;
-    margin-right: 10px;
- }
+#root {
+  height: 100%;
+  margin-right: 10px;
+  position: relative;
+}
 
- .bottom {
-    position:absolute;
-    right: 10px;
-    width: calc(100% - 10px);
-    bottom: 10px;
- }
+.conversation {
+  width: 100%;
+  overflow-y: scroll;
+  position: absolute;
+  bottom: 60px;
+  max-height: calc(100% - 60px);
+  scrollbar-width: none; /* Firefox */
+  -ms-overflow-style: none; /* Internet Explorer and Edge */
+}
 
- .message {
-    margin-bottom: 10px;
- }
+.conversation::-webkit-scrollbar {
+  display: none; /* Chrome, Safari, and Opera */
+}
 
- .message.user {
-    float: right;
- }
+.bottom {
+  position: fixed;
+  height: 50px;
+  right: 10px;
+  width: calc(100% - 10px);
+  bottom: 10px;
+}
 
- .clearfix {
-    overflow: auto;
- }
+.actions {
+  float: right;
+  column-gap: 10px;
+  margin-top: 10px;
+  margin-bottom: 10px;
+}
+
+.actions-box {
+  box-sizing: border-box;
+  padding: 5px;
+  /* rounded corners */
+  border-radius: 5px;
+  /* light blue thin border */
+  border: 1px solid #479ef5;
+  width: 100%;
+}
+
+.message {
+  padding: 10px;
+  margin-bottom: 10px;
+  border-radius: 5px;
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.3);
+  max-width: 85%;
+}
+
+.message.user {
+  float: right;
+  background-color: #479ef5;
+  color: white;
+}
+
+.message.assistant {
+  float: left;
+  background-color: #e6e6e6;
+  color: black;
+}
+
+.clearfix {
+  overflow: auto;
+}
+
+/**
+ * ==============================================
+ * Dot Flashing
+ * ==============================================
+ */
+.dot-flashing {
+  margin-left: 20px;
+  margin-bottom: 20px;
+  position: relative;
+  width: 10px;
+  height: 10px;
+  border-radius: 5px;
+  background-color: #479ef5;
+  color: #479ef5;
+  animation: dot-flashing 1s infinite linear alternate;
+  animation-delay: 0.5s;
+}
+.dot-flashing::before,
+.dot-flashing::after {
+  content: "";
+  display: inline-block;
+  position: absolute;
+  top: 0;
+}
+.dot-flashing::before {
+  left: -15px;
+  width: 10px;
+  height: 10px;
+  border-radius: 5px;
+  background-color: #479ef5;
+  color: #479ef5;
+  animation: dot-flashing 1s infinite alternate;
+  animation-delay: 0s;
+}
+.dot-flashing::after {
+  left: 15px;
+  width: 10px;
+  height: 10px;
+  border-radius: 5px;
+  background-color: #479ef5;
+  color: #479ef5;
+  animation: dot-flashing 1s infinite alternate;
+  animation-delay: 1s;
+}
+
+@keyframes dot-flashing {
+  0% {
+    background-color: #479ef5;
+  }
+  50%,
+  100% {
+    background-color: rgba(15, 108, 189, 0.2);
+  }
+}
+
+.settings {
+  margin: 10px;
+}
