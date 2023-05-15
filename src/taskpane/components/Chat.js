@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Textarea } from "@fluentui/react-components";
+import { Textarea, tokens } from "@fluentui/react-components";
 import gptService from "../services/gptService";
 
 const Chat = (props) => {
@@ -15,10 +15,18 @@ const Chat = (props) => {
         setMessage("");
         setIsWaiting(true);
         setMessages([...messages, { role: "user", content: message }]);
-        let answer = await gptService.getGPTResponse(newConversation);
-        const updatedConversation = [...newConversation, { role: "assistant", content: answer }];
-        setIsWaiting(false);
-        setMessages(updatedConversation);
+
+        let answer;
+        try {
+          let json = await gptService.getGPTResponse(newConversation);
+          answer = json["choices"][0]["message"]["content"];
+        } catch (error) {
+          answer = `${error}`;
+        } finally {
+          setIsWaiting(false);
+          const updatedConversation = [...newConversation, { role: "assistant", content: answer }];
+          setMessages(updatedConversation);
+        }
       }
     } else if (e.key === "ArrowUp") {
       e.preventDefault();
@@ -41,18 +49,8 @@ const Chat = (props) => {
         {isWaiting && <div class="dot-flashing"></div>}
       </div>
       <div className="bottom">
-        {/* <div className="actions">
-          <p className="actions-box">
-            <Link spacing="spacingHorizontalM" appearance="primary">
-              Summarize this email
-            </Link>
-          </p>
-          <p className="actions-box">
-            <Link appearance="primary">Generate a response</Link>
-          </p>
-        </div> */}
         <Textarea
-          style={{ width: "100%" }}
+          style={{ width: "100%", marginBottom: tokens.spaciingVerticalL }}
           placeholder="Ask me anything..."
           onKeyDown={handleKeyDown}
           value={message}

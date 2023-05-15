@@ -21,7 +21,7 @@ body {
   width: 100%;
   overflow-y: scroll;
   position: absolute;
-  bottom: 60px;
+  bottom: 80px;
   max-height: calc(100% - 60px);
   scrollbar-width: none; /* Firefox */
   -ms-overflow-style: none; /* Internet Explorer and Edge */
@@ -36,7 +36,7 @@ body {
   height: 50px;
   right: 10px;
   width: calc(100% - 10px);
-  bottom: 10px;
+  bottom: 20px;
 }
 
 .actions {

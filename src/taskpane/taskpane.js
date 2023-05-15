@@ -29,8 +29,6 @@ Office.onReady((info) => {
         // remove all text that says "mailto"
         bodyText = bodyText.replace(/mailto/g, "");
 
-        window.API_KEY = Office.context.roamingSettings.get("openAIKey");
-
         // render mycomponent passing messagebody as a prop
         ReactDOM.render(<App messageBody={bodyText} />, document.getElementById("root"));
       }
