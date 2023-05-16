@@ -18,7 +18,7 @@ module.exports = async (env, options) => {
     devtool: "source-map",
     entry: {
       polyfill: ["core-js/stable", "regenerator-runtime/runtime"],
-      taskpane: ["./src/taskpane/taskpane.js", "./src/taskpane/taskpane.html"]
+      taskpane: ["./src/index.js", "./src/index.html"],
     },
     output: {
       clean: true,
@@ -54,8 +54,8 @@ module.exports = async (env, options) => {
     },
     plugins: [
       new HtmlWebpackPlugin({
-        filename: "taskpane.html",
-        template: "./src/taskpane/taskpane.html",
+        filename: "index.html",
+        template: "./src/index.html",
         chunks: ["polyfill", "taskpane"],
       }),
       new CopyWebpackPlugin({
@@ -76,7 +76,7 @@ module.exports = async (env, options) => {
             },
           },
         ],
-      })
+      }),
     ],
     devServer: {
       headers: {

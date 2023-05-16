@@ -138,3 +138,7 @@ body {
 .settings {
   margin: 10px;
 }
+
+.is-pulled-right {
+  float: right;
+}

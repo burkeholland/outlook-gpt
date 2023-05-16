@@ -22,11 +22,11 @@ const gptService = {
 
     const json = await response.json();
 
-    if (response.ok) {
-      return json["choices"][0]["message"]["content"];
-    } else {
+    if (json.error) {
       throw new Error(json.error.code);
     }
+
+    return json["choices"][0]["message"]["content"];
   },
 };
 

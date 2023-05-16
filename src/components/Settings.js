@@ -29,7 +29,9 @@ const Settings = () => {
       >
         <Input value={apiKey} onChange={handleApiKeyChange} />
       </Field>
-      <Button onClick={handleSaveClick}>Save</Button>
+      <div class="is-pulled-right">
+        <Button onClick={handleSaveClick}>Save</Button>
+      </div>
     </div>
   );
 };
